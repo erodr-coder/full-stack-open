@@ -11,6 +11,12 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const handleVote = () => {
+  const copy = [...votes]       // make a copy of the array
+  copy[selected] += 1           // add 1 to the currently displayed anecdote
+  setVotes(copy)                // set the new array as state
+}
    
   const [selected, setSelected] = useState(0)
 
@@ -18,6 +24,9 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br />
+      has {votes[selected]} votes
+      <br />
+      <button onClick={handleVote}>vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>
         next anecdote
       </button>
